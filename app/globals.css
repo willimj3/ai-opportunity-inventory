@@ -1,26 +1,110 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #faf7f1;
+  --paper-raised: #ffffff;
+  --paper-sunken: #f1ece2;
+  --ink: #1c1814;
+  --ink-soft: #4f463c;
+  --ink-faint: #8a7f70;
+  --rule: #d9d0c1;
+  --rule-strong: #1c1814;
+  --accent: #b34700;
+  --accent-deep: #8c3800;
+  --accent-wash: #f6e3d3;
+  --moss: #4a5d3a;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-paper-sunken: var(--paper-sunken);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-wash: var(--accent-wash);
+  --color-moss: var(--moss);
+  --font-serif: var(--font-newsreader);
+  --font-sans: var(--font-public-sans);
+  --font-mono: var(--font-plex-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-public-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+/* Mono ledger label — used for eyebrows, tags, and column heads */
+.label {
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Staggered load-in for hero elements */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise {
+  opacity: 0;
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* Blinking cursor for the streaming assistant */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Simple markdown-ish rendering inside chat bubbles */
+.chat-prose p { margin: 0.5rem 0; }
+.chat-prose p:first-child { margin-top: 0; }
+.chat-prose p:last-child { margin-bottom: 0; }
+.chat-prose ul, .chat-prose ol { margin: 0.5rem 0 0.5rem 1.25rem; }
+.chat-prose ul { list-style: disc; }
+.chat-prose ol { list-style: decimal; }
+.chat-prose li { margin: 0.15rem 0; }
+.chat-prose strong { font-weight: 650; }
+.chat-prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.chat-prose code {
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 0.85em;
+  background: var(--paper-sunken);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
 }
