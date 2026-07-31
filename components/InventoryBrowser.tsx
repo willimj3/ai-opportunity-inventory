@@ -104,8 +104,16 @@ export function InventoryBrowser({ opportunities, domains, stages, orgTypes }: P
                     <span className="label border border-rule px-2 py-1 text-ink-faint">{stageShort(opp.deploymentStage)}</span>
                   ) : null}
                 </div>
-                <h2 className="mt-3 font-serif text-2xl leading-snug tracking-tight">{opp.title}</h2>
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{opp.summary}</p>
+                <h2
+                  className={`mt-3 font-serif leading-snug tracking-tight ${
+                    opp.title.length > 120 ? "text-lg" : "text-2xl"
+                  } ${isOpen ? "" : "line-clamp-3"}`}
+                >
+                  {opp.title}
+                </h2>
+                <p className={`mt-2 text-sm leading-relaxed text-ink-soft ${isOpen ? "" : "line-clamp-4"}`}>
+                  {opp.summary}
+                </p>
                 <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
                   <p className="label text-ink-faint">
                     {opp.submitter}
