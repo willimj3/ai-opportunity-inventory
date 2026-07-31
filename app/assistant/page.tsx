@@ -4,7 +4,7 @@ import { Assistant } from "@/components/Assistant";
 export const metadata: Metadata = {
   title: "Research Assistant",
   description:
-    "Ask about the AI Opportunity Inventory, or — as a community member — run the full research memo workflow with an AI research coach.",
+    "Ask anything about real-world AI projects tackling public problems — or, as a program member, get coached from first idea to a published research memo.",
 };
 
 export default function AssistantPage() {

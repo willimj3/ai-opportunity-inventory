@@ -15,17 +15,17 @@ type MemberState =
   | { status: "member"; name?: string; school?: string };
 
 const PUBLIC_STARTERS = [
-  "What kinds of AI opportunities are in the inventory so far?",
-  "Which entries focus on climate or the environment?",
-  "How does an opportunity get vetted and published?",
-  "How can I join the community?",
+  "What is this site? Give me the quick tour.",
+  "Show me examples of AI being used for climate and the environment.",
+  "Which of these projects are actually up and running, not just ideas?",
+  "I know an AI project doing public good — how do I get it added here?",
 ];
 
 const MEMBER_STARTERS = [
-  "I have an AI opportunity idea I'd like to propose.",
-  "Run a duplicate check on my idea before I write it up.",
-  "I've drafted Sections 1–6 of my memo — review them.",
-  "What should a strong Section 7 (legal barriers) look like?",
+  "I have an idea for a new entry — help me figure out if it's worth writing up.",
+  "What does writing a research memo involve, start to finish?",
+  "I have a draft going — how do I get your feedback on it?",
+  "How does my memo get reviewed and published?",
 ];
 
 /** Minimal, safe markdown-ish rendering: escape HTML, then bold/links/lists. */
@@ -235,14 +235,29 @@ export function Assistant() {
       <div className="border-b border-rule-strong pb-6">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="label mb-2 text-accent">AI Opportunity Research Assistant</p>
+            <p className="label mb-2 text-accent">The Research Assistant</p>
             <h1 className="font-serif text-3xl tracking-tight sm:text-4xl">
               {member.status === "member" ? (
                 <>Welcome back{member.name ? `, ${member.name.split(" ")[0]}` : ""}.</>
               ) : (
-                <>Ask about the inventory.</>
+                <>Ask me anything about AI for the public good.</>
               )}
             </h1>
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-soft">
+              {member.status === "member" ? (
+                <>
+                  Tell me your idea and I&apos;ll help you turn it into a published
+                  research memo — or pick up wherever you left off.
+                </>
+              ) : (
+                <>
+                  This site collects real examples of AI tackling public problems —
+                  in courts, classrooms, elections, disaster response, and more.
+                  I&apos;m the guide: ask what&apos;s in the collection, dig into any
+                  entry, or find out how to contribute one of your own.
+                </>
+              )}
+            </p>
           </div>
           {member.status === "member" ? (
             <div className="text-right">
@@ -258,10 +273,11 @@ export function Assistant() {
         {member.status === "public" ? (
           <div className="mt-5 border border-rule bg-paper-sunken p-4">
             <p className="text-sm text-ink-soft">
-              <span className="font-medium text-ink">Community member?</span> Verify
-              the email you used on the interest form to unlock the full memo
-              workflow — duplicate checks, triage, assignments, and editorial
-              submission.
+              <span className="font-medium text-ink">Part of the research community?</span>{" "}
+              Students and researchers in the program can do more than browse: I&apos;ll
+              help you check whether your idea is already covered, develop it into a
+              short research memo, and send the finished draft to the human editors.
+              Enter the email you signed up with to switch that on.
             </p>
             <form onSubmit={verify} className="mt-3 flex flex-wrap gap-2">
               <input
@@ -371,8 +387,8 @@ export function Assistant() {
             rows={2}
             placeholder={
               member.status === "member"
-                ? "Propose an opportunity, paste a draft section, or ask a question…"
-                : "Ask about the inventory…"
+                ? "Tell me your idea, paste a draft, or ask anything…"
+                : "Ask about any project here, or how to get involved…"
             }
             className="flex-1 resize-none border border-rule bg-paper-raised px-3.5 py-3 text-sm leading-relaxed outline-none transition-colors placeholder:text-ink-faint focus:border-accent"
           />

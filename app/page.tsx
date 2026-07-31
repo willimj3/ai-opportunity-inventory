@@ -181,11 +181,11 @@ export default async function Home() {
               not a ghostwriter.
             </h2>
             <p className="mt-5 max-w-md leading-relaxed text-ink-soft">
-              Anyone can ask the assistant about the inventory. Community members
-              unlock the full memo workflow: duplicate checks against the bank,
-              structured triage, memo assignments, staged draft review, and
-              submission to human editors. It will question your analysis — it
-              won&apos;t write it for you.
+              Anyone can ask it what&apos;s in the collection and what it all means.
+              Students and researchers in the program get more: it tests whether
+              your idea is genuinely new, pushes you to back every claim with real
+              sources, and hands your memo to human editors when it&apos;s ready.
+              It asks the hard questions — it won&apos;t write the memo for you.
             </p>
             <Link
               href="/assistant"
