@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { INTEREST_FORM_URL } from "@/lib/config";
+import { STUDENT_PATH } from "@/lib/studentPath";
 
 interface ChatMessage {
   role: "user" | "assistant";
@@ -315,6 +316,22 @@ export function Assistant() {
       <div ref={scrollRef} className="flex-1 overflow-y-auto py-6" aria-live="polite">
         {messages.length === 0 ? (
           <div>
+            {member.status === "public" ? (
+              <div className="mb-8">
+                <p className="label mb-4 text-ink-faint">
+                  For student researchers — have an idea? Here&apos;s the path.
+                </p>
+                <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                  {STUDENT_PATH.map((step) => (
+                    <li key={step.n} className="border-t-2 border-rule-strong pt-3">
+                      <p className="font-serif text-lg text-accent">{step.n}</p>
+                      <h3 className="mt-1 font-serif text-base tracking-tight">{step.title}</h3>
+                      <p className="mt-1.5 text-xs leading-relaxed text-ink-soft">{step.body}</p>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            ) : null}
             <p className="label mb-4 text-ink-faint">Try asking</p>
             <div className="grid gap-2 sm:grid-cols-2">
               {starters.map((starter) => (

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { INTEREST_FORM_URL, SUBSTACK_URL, UT_INVENTORY_URL } from "@/lib/config";
 import { getOpportunities, uniqueValues } from "@/lib/inventory";
+import { STUDENT_PATH } from "@/lib/studentPath";
 
 export const revalidate = 900;
 
@@ -27,28 +28,6 @@ const STEPS = [
   },
 ] as const;
 
-const STUDENT_PATH = [
-  {
-    n: "1",
-    title: "Verify you're a member",
-    body: "On the assistant page, enter the email you joined with. Not a member yet? The interest form takes two minutes.",
-  },
-  {
-    n: "2",
-    title: "Pitch your idea",
-    body: "Describe the AI opportunity in a sentence or two. The assistant immediately searches everything in the bank — and every idea another student has already claimed — so you know within a minute whether yours is open.",
-  },
-  {
-    n: "3",
-    title: "Develop the memo, with a guide",
-    body: "If your idea holds up, it's recorded under your name and you get a structured path: a memo template, staged feedback on each section, and a coach that demands real sources — and won't write it for you.",
-  },
-  {
-    n: "4",
-    title: "Editors take it from there",
-    body: "When your draft meets the bar, the assistant submits it to the human editors, who decide what gets published.",
-  },
-] as const;
 
 export default async function Home() {
   let count = 0;
@@ -101,6 +80,12 @@ export default async function Home() {
             >
               Ask the assistant
             </Link>
+            <a
+              href="#students"
+              className="label px-2 py-3 text-accent underline underline-offset-4 transition-colors hover:text-accent-deep"
+            >
+              Have an idea? Start here ↓
+            </a>
           </div>
           {count > 0 ? (
             <div
@@ -180,6 +165,40 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Student path */}
+      <section className="border-b border-rule" id="students">
+        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:py-20">
+          <p className="label mb-4 text-accent">For student researchers</p>
+          <h2 className="max-w-2xl font-serif text-3xl leading-tight tracking-tight sm:text-4xl">
+            Have an idea? Here&apos;s the path.
+          </h2>
+          <ol className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {STUDENT_PATH.map((step) => (
+              <li key={step.n} className="border-t-2 border-rule-strong pt-4">
+                <p className="font-serif text-2xl text-accent">{step.n}</p>
+                <h3 className="mt-2 font-serif text-xl tracking-tight">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{step.body}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <Link
+              href="/assistant"
+              className="label border border-rule-strong bg-ink px-5 py-3 text-paper transition-colors hover:bg-accent-deep"
+            >
+              Start with your idea
+            </Link>
+            <p className="text-sm text-ink-soft">
+              Full program details at{" "}
+              <a href={UT_INVENTORY_URL} className="text-accent underline underline-offset-2 hover:text-accent-deep" target="_blank" rel="noopener noreferrer">
+                law.utexas.edu/ai
+              </a>
+              .
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Assistant callout */}
       <section className="border-b border-rule bg-paper-sunken">
         <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-5 py-16 sm:grid-cols-2 sm:py-20">
@@ -213,40 +232,6 @@ export default async function Home() {
               <p><span className="text-accent">Required next step:</span> Narrow to court-record collections and identify the operating institution.</p>
               <p><span className="text-accent">Suggested memo focus:</span> Access-to-justice deployment context; records privacy as the lead legal issue.</p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Student path */}
-      <section className="border-b border-rule" id="students">
-        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:py-20">
-          <p className="label mb-4 text-accent">For student researchers</p>
-          <h2 className="max-w-2xl font-serif text-3xl leading-tight tracking-tight sm:text-4xl">
-            Have an idea? Here&apos;s the path.
-          </h2>
-          <ol className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {STUDENT_PATH.map((step) => (
-              <li key={step.n} className="border-t-2 border-rule-strong pt-4">
-                <p className="font-serif text-2xl text-accent">{step.n}</p>
-                <h3 className="mt-2 font-serif text-xl tracking-tight">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{step.body}</p>
-              </li>
-            ))}
-          </ol>
-          <div className="mt-10 flex flex-wrap items-center gap-4">
-            <Link
-              href="/assistant"
-              className="label border border-rule-strong bg-ink px-5 py-3 text-paper transition-colors hover:bg-accent-deep"
-            >
-              Start with your idea
-            </Link>
-            <p className="text-sm text-ink-soft">
-              Full program details at{" "}
-              <a href={UT_INVENTORY_URL} className="text-accent underline underline-offset-2 hover:text-accent-deep" target="_blank" rel="noopener noreferrer">
-                law.utexas.edu/ai
-              </a>
-              .
-            </p>
           </div>
         </div>
       </section>
