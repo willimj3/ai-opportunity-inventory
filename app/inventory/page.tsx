@@ -28,9 +28,9 @@ export default async function InventoryPage() {
       </h1>
       <p className="mt-4 max-w-2xl leading-relaxed text-ink-soft">
         Transparency is a core principle of the inventory: every entry appears here
-        before any vetting, so researchers and organizations can assess the
-        landscape for themselves. Entries are community submissions and are not
-        endorsements. Read more about the process at{" "}
+        exactly as it came in — no editing, no filtering — so researchers and
+        organizations can assess the landscape for themselves. Entries are community
+        submissions and are not endorsements. Read more about the process at{" "}
         <a
           href={UT_INVENTORY_URL}
           className="text-accent underline underline-offset-2 hover:text-accent-deep"

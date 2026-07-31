@@ -4,19 +4,6 @@ import { getOpportunities, uniqueValues } from "@/lib/inventory";
 
 export const revalidate = 900;
 
-const COLLABORATORS = [
-  ["Kevin Frazier", "The University of Texas School of Law"],
-  ["Suresh Venkatasubramanian", "Center for Tech Responsibility, Brown University"],
-  ["B Cavello", "Aspen Digital, The Aspen Institute"],
-  ["Rachael Samberg", "UC Berkeley Library"],
-  ["Adefoluke Shemsu", "SeedAI & Horizon Institute for Public Service"],
-  ["Matthew Sag", "Emory University School of Law"],
-  ["Diane Staheli", "MIT Lincoln Laboratory"],
-  ["Dan Zhao", "NYU & MIT"],
-  ["Cherry Wu", "Independent"],
-  ["Alexander Schneider", "Independent"],
-] as const;
-
 const STEPS = [
   {
     n: "01",
@@ -27,16 +14,39 @@ const STEPS = [
   {
     n: "02",
     title: "The Raw Opportunity Bank",
-    body: "Every submission lands first in a publicly viewable database — an unfiltered look at the incoming landscape, open for independent analysis and collaboration.",
+    body: "Every submission lands in a publicly viewable bank — an unfiltered look at the incoming landscape, exactly as submitted, open for independent analysis and collaboration.",
     link: { href: "/inventory", label: "Browse the bank", external: false },
   },
   {
     n: "03",
-    title: "The Vetted Opportunity Bank",
-    body: "Student–faculty teams from Texas Law, Brown, Berkeley, and partner schools research each opportunity against criteria for impact, scalability, ethics, and societal alignment — producing memos that pass human editorial review before publication.",
+    title: "Researched & published",
+    body: "Student researchers put promising entries under real legal and policy scrutiny — short research memos, built with structured coaching and reviewed by human editors, then published as posts anyone can read.",
     link: SUBSTACK_URL
-      ? { href: SUBSTACK_URL, label: "Read published memos", external: true }
+      ? { href: SUBSTACK_URL, label: "Read the posts", external: true }
       : { href: "/assistant", label: "See how memos are built", external: false },
+  },
+] as const;
+
+const STUDENT_PATH = [
+  {
+    n: "1",
+    title: "Verify you're a member",
+    body: "On the assistant page, enter the email you joined with. Not a member yet? The interest form takes two minutes.",
+  },
+  {
+    n: "2",
+    title: "Pitch your idea",
+    body: "Describe the AI opportunity in a sentence or two. The assistant immediately searches everything in the bank — and every idea another student has already claimed — so you know within a minute whether yours is open.",
+  },
+  {
+    n: "3",
+    title: "Develop the memo, with a guide",
+    body: "If your idea holds up, it's recorded under your name and you get a structured path: a memo template, staged feedback on each section, and a coach that demands real sources — and won't write it for you.",
+  },
+  {
+    n: "4",
+    title: "Editors take it from there",
+    body: "When your draft meets the bar, the assistant submits it to the human editors, who decide what gets published.",
   },
 ] as const;
 
@@ -207,25 +217,37 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Collaborators */}
-      <section className="border-b border-rule">
+      {/* Student path */}
+      <section className="border-b border-rule" id="students">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:py-20">
-          <p className="label mb-8 text-ink-faint">Collaborators</p>
-          <ul className="grid gap-x-10 gap-y-4 sm:grid-cols-2">
-            {COLLABORATORS.map(([name, affiliation]) => (
-              <li key={name} className="flex items-baseline justify-between gap-4 border-b border-rule pb-3">
-                <span className="font-serif text-lg">{name}</span>
-                <span className="text-right text-xs text-ink-faint">{affiliation}</span>
+          <p className="label mb-4 text-accent">For student researchers</p>
+          <h2 className="max-w-2xl font-serif text-3xl leading-tight tracking-tight sm:text-4xl">
+            Have an idea? Here&apos;s the path.
+          </h2>
+          <ol className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {STUDENT_PATH.map((step) => (
+              <li key={step.n} className="border-t-2 border-rule-strong pt-4">
+                <p className="font-serif text-2xl text-accent">{step.n}</p>
+                <h3 className="mt-2 font-serif text-xl tracking-tight">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{step.body}</p>
               </li>
             ))}
-          </ul>
-          <p className="mt-8 text-sm text-ink-soft">
-            Full program details at{" "}
-            <a href={UT_INVENTORY_URL} className="text-accent underline underline-offset-2 hover:text-accent-deep" target="_blank" rel="noopener noreferrer">
-              law.utexas.edu/ai
-            </a>
-            .
-          </p>
+          </ol>
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <Link
+              href="/assistant"
+              className="label border border-rule-strong bg-ink px-5 py-3 text-paper transition-colors hover:bg-accent-deep"
+            >
+              Start with your idea
+            </Link>
+            <p className="text-sm text-ink-soft">
+              Full program details at{" "}
+              <a href={UT_INVENTORY_URL} className="text-accent underline underline-offset-2 hover:text-accent-deep" target="_blank" rel="noopener noreferrer">
+                law.utexas.edu/ai
+              </a>
+              .
+            </p>
+          </div>
         </div>
       </section>
 
