@@ -5,6 +5,8 @@ Inventory](https://law.utexas.edu/ai/ai-opportunity-inventory/), a
 multi-stakeholder initiative led by the University of Texas School of Law AI
 Innovation and Law Program.
 
+**Live site:** https://ai-opportunity-inventory.vercel.app
+
 - **/** — program landing page
 - **/inventory** — browsable, read-only Raw Opportunity Bank (search + filters)
 - **/assistant** — research assistant: public Q&A for anyone; the full memo
